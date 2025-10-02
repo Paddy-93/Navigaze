@@ -46,7 +46,7 @@ NavigazeGazeTester_Distribution/
 
 ## What Gets Included
 
-### ✅ Included in Executable:
+### [OK] Included in Executable:
 - All Python code and dependencies
 - OpenCV, MediaPipe, NumPy
 - Tkinter GUI framework

@@ -286,7 +286,7 @@ class GazeDetector:
             self.current_color_index = (self.current_color_index + 1) % len(self.arrow_colors)
             self.last_gaze_time = now_ms
             # print(f"GAZE DETECTED: {self.current_gaze_state} (offset: {gaze_offset:.3f})")  # Disabled for performance
-            # print(f"🔍 GAZE DEBUG: Detected {self.current_gaze_state} (offset: {gaze_offset:.3f}, baseline: {self.baseline_y:.3f})")  # Disabled to prevent hanging
+            # print(f"[DEBUG] GAZE DEBUG: Detected {self.current_gaze_state} (offset: {gaze_offset:.3f}, baseline: {self.baseline_y:.3f})")  # Disabled to prevent hanging
             
             # Return gaze detection - ONLY ONCE per gaze
             return {

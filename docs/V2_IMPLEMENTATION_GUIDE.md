@@ -10,7 +10,7 @@ Created a **completely clean implementation** with proper flow control and no ti
 2. **`run_test_v2.py`** - Run with real gaze detector
 3. **`run_test_v2_sim.py`** - Run with simulated gaze detector
 
-## ✅ CORRECT FLOW (All Steps)
+## [OK] CORRECT FLOW (All Steps)
 
 ### Universal Flow for ALL Steps:
 
@@ -123,9 +123,9 @@ The V2 system provides clear logging:
 🎬 STEP 1/14: Initial Calibration
 📹 Recording initialized: Initial Calibration
 🔊 Starting TTS: 'Look at the red dot...'
-✅ TTS complete
+[OK] TTS complete
 🔍 Checking readiness: Recording=True, TTS=True
-✅ Both ready - waiting 1 second before beep
+[OK] Both ready - waiting 1 second before beep
 🔊 Playing beep...
 🎬 Executing step action: Initial Calibration
 🎯 Calibration started
@@ -154,9 +154,9 @@ The V2 file has the structure but needs these parts completed:
 
 ## 🎯 Why V2 is Better
 
-- ✅ **Clean separation** of concerns
-- ✅ **Simple flow** - easy to understand
-- ✅ **Proper timing** - no race conditions
-- ✅ **Bulletproof** - handles edge cases
-- ✅ **Debuggable** - clear logging
-- ✅ **Maintainable** - well-structured code
+- [OK] **Clean separation** of concerns
+- [OK] **Simple flow** - easy to understand
+- [OK] **Proper timing** - no race conditions
+- [OK] **Bulletproof** - handles edge cases
+- [OK] **Debuggable** - clear logging
+- [OK] **Maintainable** - well-structured code
