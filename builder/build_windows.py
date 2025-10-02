@@ -12,21 +12,21 @@ def install_pyinstaller():
     """Install PyInstaller if not already installed"""
     try:
         import PyInstaller
-        print("✅ PyInstaller already installed")
+        print("[OK] PyInstaller already installed")
         return True
     except ImportError:
-        print("📦 Installing PyInstaller...")
+        print("[INFO] Installing PyInstaller...")
         try:
             subprocess.check_call([sys.executable, "-m", "pip", "install", "pyinstaller"])
-            print("✅ PyInstaller installed successfully")
+            print("[OK] PyInstaller installed successfully")
             return True
         except subprocess.CalledProcessError as e:
-            print(f"❌ Failed to install PyInstaller: {e}")
+            print(f"[ERROR] Failed to install PyInstaller: {e}")
             return False
 
 def build_windows_executable():
     """Build executable for Windows"""
-    print("🔨 Building Windows executable...")
+    print("[INFO] Building Windows executable...")
     
     # PyInstaller command for Windows
     cmd = [
@@ -57,15 +57,15 @@ def build_windows_executable():
     
     try:
         subprocess.check_call(cmd)
-        print("✅ Windows executable built successfully!")
+        print("[OK] Windows executable built successfully!")
         return True
     except subprocess.CalledProcessError as e:
-        print(f"❌ Build failed: {e}")
+        print(f"[ERROR] Build failed: {e}")
         return False
 
 def create_windows_distribution():
     """Create distribution package for Windows"""
-    print("📦 Creating Windows distribution...")
+    print("[INFO] Creating Windows distribution...")
     
     dist_dir = "NavigazeGazeTester_Windows_Distribution"
     
@@ -86,9 +86,9 @@ def create_windows_distribution():
     if exe_path:
         import shutil
         shutil.copy2(exe_path, f"{dist_dir}/NavigazeGazeTester_Windows")
-        print(f"✅ Copied executable to {dist_dir}/")
+        print(f"[OK] Copied executable to {dist_dir}/")
     else:
-        print("❌ Executable not found in dist/")
+        print("[ERROR] Executable not found in dist/")
         return False
     
     # Copy additional files
@@ -102,7 +102,7 @@ def create_windows_distribution():
             import shutil
             filename = os.path.basename(file)
             shutil.copy2(file, f"{dist_dir}/{filename}")
-            print(f"✅ Copied {filename}")
+            print(f"[OK] Copied {filename}")
     
     # Create README for Windows
     readme_content = """# Navigaze Gaze Tester - Windows Version
@@ -146,22 +146,22 @@ pause
     with open(f"{dist_dir}/Run_Windows.bat", "w") as f:
         f.write(batch_content)
     
-    print(f"✅ Windows distribution created: {dist_dir}/")
+    print(f"[OK] Windows distribution created: {dist_dir}/")
     return True
 
 def main():
-    print("🚀 Navigaze Gaze Tester - Windows Builder")
+    print("Navigaze Gaze Tester - Windows Builder")
     print("=" * 50)
     
     # Check current platform
     current_platform = platform.system()
-    print(f"🔍 Current platform: {current_platform}")
+    print(f"[INFO] Current platform: {current_platform}")
     
     if current_platform != "Windows":
-        print("⚠️  You're not on Windows - this will build for Windows")
+        print("[WARN] You're not on Windows - this will build for Windows")
         print("   The executable will work on Windows but may not run on your current system")
     else:
-        print("✅ You're on Windows - this will build natively")
+        print("[OK] You're on Windows - this will build natively")
     
     print()
     
@@ -177,9 +177,9 @@ def main():
     if not create_windows_distribution():
         return False
     
-    print("\n🎉 Windows build completed successfully!")
-    print("\n📁 Your Windows executable is in: NavigazeGazeTester_Windows_Distribution/")
-    print("\n📋 To distribute:")
+    print("\n[SUCCESS] Windows build completed successfully!")
+    print("\n[INFO] Your Windows executable is in: NavigazeGazeTester_Windows_Distribution/")
+    print("\n[INFO] To distribute:")
     print("1. Zip the NavigazeGazeTester_Windows_Distribution folder")
     print("2. Send the zip file to Windows users")
     print("3. Users extract and run NavigazeGazeTester_Windows.exe")
