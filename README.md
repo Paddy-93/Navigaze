@@ -1,19 +1,19 @@
-# Navigaze 🚀
+# Navigaze
 
 **Professional Gaze-Controlled Navigation System**
 
 Navigaze enables hands-free computer navigation and text input using only eye movements. Navigate through applications, input text via Morse code, and control your computer with precision gaze detection.
 
-## ✨ Features
+## Features
 
-- **🎯 Gaze Navigation**: Tab through UI elements, scroll pages using UP/DOWN eye movements
-- **📝 Morse Text Input**: Type text using gaze-based Morse code patterns
-- **🔄 Mode Switching**: Seamless switching between navigation and text modes
-- **📊 Real-time Status**: Live status display via system tray (Windows)
-- **⚡ Sequence Commands**: Execute commands via gaze patterns
-- **🎛️ Calibration System**: Automatic baseline calibration for accurate detection
+- **Gaze Navigation**: Tab through UI elements, scroll pages using UP/DOWN eye movements
+- **Morse Text Input**: Type text using gaze-based Morse code patterns
+- **Mode Switching**: Seamless switching between navigation and text modes
+- **Real-time Status**: Live status display via system tray (Windows)
+- **Sequence Commands**: Execute commands via gaze patterns
+- **Calibration System**: Automatic baseline calibration for accurate detection
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -41,7 +41,7 @@ python main.py
 3. **Text Input**: Focus on text fields for 3 seconds to enter TEXT mode
 4. **Commands**: Use gaze sequences for special actions
 
-## 🎮 Usage
+## Usage
 
 ### Navigation Modes
 
@@ -76,37 +76,37 @@ When in TEXT mode:
 3. **Use morse code** to input text
 4. **Hold neutral for 3 seconds** to exit back to navigation mode
 
-## 🏗️ Project Structure
+## Project Structure
 
 The project is organized by **functionality**, making it easy to understand what each part does:
 
 ```
 Navigaze/
-├── main.py                    # 🚀 Main application entry point
-├── config.py                  # ⚙️ All configuration settings
-├── requirements.txt           # 📦 Python dependencies
-├── eye_tracking/              # 👁️ Everything related to detecting eye movements
-│   ├── calibration_popup.py   #   📍 Calibrates the eye tracking system
-│   ├── face_landmarks.py      #   🎯 Processes face landmarks from camera
-│   └── gaze_detector.py       #   🔍 Detects UP/DOWN eye movements
-├── input_processing/          # ⌨️ Converts eye movements into actions
-│   ├── sequence_manager.py    #   🔄 Recognizes gaze patterns (UP-DOWN-UP-DOWN)
-│   ├── morse_handler.py       #   📝 Converts gaze to morse code text
-│   ├── morse_dict.py          #   📚 Morse code dictionary
-│   └── command_executor.py    #   ⚡ Executes keyboard commands (Tab, Enter, etc.)
-└── user_interface/            # 🖥️ Shows status and detects text fields
-    ├── appbar.py              #   📊 Shows status bar (Windows only)
-    ├── advanced_uia_detector.py #   🔍 Detects text fields automatically
-    └── visualization.py       #   🎨 Drawing and visualization functions
+├── main.py                    # Main application entry point
+├── config.py                  # All configuration settings
+├── requirements.txt           # Python dependencies
+├── eye_tracking/              # Everything related to detecting eye movements
+│   ├── calibration_popup.py   #   Calibrates the eye tracking system
+│   ├── face_landmarks.py      #   Processes face landmarks from camera
+│   └── gaze_detector.py       #   Detects UP/DOWN eye movements
+├── input_processing/          # Converts eye movements into actions
+│   ├── sequence_manager.py    #   Recognizes gaze patterns (UP-DOWN-UP-DOWN)
+│   ├── morse_handler.py       #   Converts gaze to morse code text
+│   ├── morse_dict.py          #   Morse code dictionary
+│   └── command_executor.py    #   Executes keyboard commands (Tab, Enter, etc.)
+└── user_interface/            # Shows status and detects text fields
+    ├── appbar.py              #   Shows status bar (Windows only)
+    ├── advanced_uia_detector.py #   Detects text fields automatically
+    └── visualization.py       #   Drawing and visualization functions
 ```
 
 ### What Each Directory Does
 
-- **👁️ eye_tracking/**: Takes camera input → detects where you're looking
-- **⌨️ input_processing/**: Takes eye movements → converts to keyboard actions
-- **🖥️ user_interface/**: Shows you what's happening + detects text fields
+- **eye_tracking/**: Takes camera input → detects where you're looking
+- **input_processing/**: Takes eye movements → converts to keyboard actions
+- **user_interface/**: Shows you what's happening + detects text fields
 
-## ⚙️ Configuration
+## Configuration
 
 Edit `config.py` to customize:
 

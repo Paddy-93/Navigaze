@@ -56,10 +56,10 @@ class ComprehensiveAutomatedTest:
     def analyze_gaze_frequency(self):
         """Analyze gaze frequency for debugging"""
         if not self.gaze_times:
-            print("❌ No gazes detected during test")
+            print("[ERROR] No gazes detected during test")
             return
             
-        print(f"📊 GAZE FREQUENCY ANALYSIS:")
+        print(f"[ANALYSIS] GAZE FREQUENCY ANALYSIS:")
         print(f"   Total gazes detected: {self.gaze_count}")
         print(f"   Test duration: {time.time() - self.test_start_time:.1f} seconds")
         print(f"   Average gazes per second: {self.gaze_count / (time.time() - self.test_start_time):.2f}")
@@ -70,12 +70,12 @@ class ComprehensiveAutomatedTest:
             time_diff = self.gaze_times[i] - self.gaze_times[i-1]
             if time_diff < 1.0:
                 too_frequent += 1
-                print(f"   ⚠️  Gaze {i} detected {time_diff:.2f}s after previous (too fast!)")
+                print(f"   [WARN] Gaze {i} detected {time_diff:.2f}s after previous (too fast!)")
         
         if too_frequent == 0:
-            print("   ✅ All gazes properly spaced (1+ seconds apart)")
+            print("   [OK] All gazes properly spaced (1+ seconds apart)")
         else:
-            print(f"   ❌ {too_frequent} gazes detected too frequently")
+            print(f"   [ERROR] {too_frequent} gazes detected too frequently")
     
     def track_gaze(self, direction):
         """Track gaze detection for debugging"""
@@ -85,15 +85,15 @@ class ComprehensiveAutomatedTest:
         
         if self.last_gaze_time > 0:
             time_since_last = current_time - self.last_gaze_time
-            print(f"   👁️ GAZE #{self.gaze_count}: {direction} (after {time_since_last:.2f}s) [{current_time:.2f}]")
+            print(f"   [GAZE] GAZE #{self.gaze_count}: {direction} (after {time_since_last:.2f}s) [{current_time:.2f}]")
         else:
-            print(f"   👁️ GAZE #{self.gaze_count}: {direction} (first gaze) [{current_time:.2f}]")
+            print(f"   [GAZE] GAZE #{self.gaze_count}: {direction} (first gaze) [{current_time:.2f}]")
             
         self.last_gaze_time = current_time
         
     def run_test(self):
         """Run the comprehensive automated test"""
-        print("🚀 Starting Comprehensive Automated Gaze Test")
+        print("[START] Starting Comprehensive Automated Gaze Test")
         print("=" * 60)
         print("This will simulate a complete user walkthrough:")
         print("1. Starting screen (3 seconds)")
@@ -106,10 +106,10 @@ class ComprehensiveAutomatedTest:
         
         try:
             # Initialize the comprehensive gaze tester
-            print("📋 Initializing comprehensive gaze tester...")
+            print("[INFO] Initializing comprehensive gaze tester...")
             self.tester = ComprehensiveGazeTester(self.root, self.gaze_detector)
             self.tester.calibration_duration = 1.0  # Set to 1 second for automation
-            print("✅ Comprehensive gaze tester initialized")
+            print("[OK] Comprehensive gaze tester initialized")
             
             # Start the automated simulation
             self.start_simulation()
