@@ -93,15 +93,16 @@ def create_windows_distribution():
     
     # Copy additional files
     files_to_copy = [
-        "google_drive_uploader.py",
-        "README_GOOGLE_DRIVE.md"
+        "../gaze_reporting/google_drive_uploader.py",
+        "../gaze_reporting/README.md"
     ]
     
     for file in files_to_copy:
         if os.path.exists(file):
             import shutil
-            shutil.copy2(file, f"{dist_dir}/{file}")
-            print(f"✅ Copied {file}")
+            filename = os.path.basename(file)
+            shutil.copy2(file, f"{dist_dir}/{filename}")
+            print(f"✅ Copied {filename}")
     
     # Create README for Windows
     readme_content = """# Navigaze Gaze Tester - Windows Version
