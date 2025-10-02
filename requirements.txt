@@ -1,0 +1,32 @@
+# Core computer vision and numerical libraries
+numpy>=2.0,<3.0
+opencv-python>=4.8,<5.0
+mediapipe==0.10.14
+
+# Input control library
+pynput>=1.7.6
+
+# Text-to-speech
+pyttsx3>=2.90
+
+# Google Drive API
+google-api-python-client>=2.0.0
+google-auth-httplib2>=0.1.0
+google-auth-oauthlib>=1.0.0
+
+# GUI framework (usually included with Python)
+# tkinter - built into Python
+
+# Platform-specific dependencies (Windows only)
+pywin32>=306; sys_platform == "win32"
+uiautomation==2.0.18; sys_platform == "win32"
+comtypes>=1.1.0; sys_platform == "win32"
+
+# Optional GUI dependencies
+# pyqt5>=5.15.11
+
+# Build dependencies
+pyinstaller>=6.0.0
+
+# Web interface
+flask>=2.0.0

@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.mp4
+*.avi
+*.mov
+token.json
+credentials.json
+results/
+gaze_test_session_*/
+
+# Build artifacts
+*.spec
+build/
+dist/
+*.exe
+*.app
+*.dmg
+
+# PyInstaller build directories
+build/
+dist/
+
+# Large executables and distributions
+NavigazeGazeTester_Intel_Distribution/
+NavigazeGazeTester_Windows_Distribution/
+NavigazeGazeTester_Distribution/
+
+# Logs
+*.log
