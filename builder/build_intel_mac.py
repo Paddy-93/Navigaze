@@ -34,13 +34,13 @@ def build_intel_executable():
         "--onefile",
         "--console", 
         "--name", "NavigazeGazeTester_Intel",
-        "--add-data", "../gaze_reporting/gaze_detector_interface.py:.",
-        "--add-data", "../gaze_reporting/real_gaze_detector.py:.",
-        "--add-data", "../gaze_reporting/simulated_gaze_detector.py:.",
-        "--add-data", "../gaze_reporting/google_drive_uploader.py:.",
-        "--add-data", "../gaze_reporting/config.py:.",
-        "--add-data", "../gaze_reporting/eye_tracking:eye_tracking",
-        "--add-data", "../gaze_reporting/comprehensive_gaze_tester_refactored.py:.",
+        "--add-data", "gaze_reporting/gaze_detector_interface.py:.",
+        "--add-data", "gaze_reporting/real_gaze_detector.py:.",
+        "--add-data", "gaze_reporting/simulated_gaze_detector.py:.",
+        "--add-data", "gaze_reporting/google_drive_uploader.py:.",
+        "--add-data", "gaze_reporting/config.py:.",
+        "--add-data", "gaze_reporting/eye_tracking:eye_tracking",
+        "--add-data", "gaze_reporting/comprehensive_gaze_tester_refactored.py:.",
         "--hidden-import", "cv2",
         "--hidden-import", "mediapipe",
         "--hidden-import", "mediapipe.python.solutions.face_mesh",
@@ -52,7 +52,7 @@ def build_intel_executable():
         "--hidden-import", "google_auth_oauthlib.flow",
         "--collect-data", "mediapipe",
         "--debug", "all",
-        "../gaze_reporting/gaze_reporter.py"
+        "gaze_reporting/gaze_reporter.py"
     ]
     
     try:
@@ -87,8 +87,7 @@ def create_intel_distribution():
     
     # Copy additional files
     files_to_copy = [
-        "../gaze_reporting/google_drive_uploader.py",
-        "../gaze_reporting/README.md"
+        "gaze_reporting/README.md"
     ]
     
     for file in files_to_copy:
