@@ -28,8 +28,7 @@ jobs:
 
       - name: Build Windows executable
         run: |
-          cd builder
-          python build_windows.py
+          python builder/build_windows.py
 
       - name: Upload Windows executable
         uses: actions/upload-artifact@v4
