@@ -85,7 +85,7 @@ def create_windows_distribution():
     
     if exe_path:
         import shutil
-        shutil.copy2(exe_path, f"{dist_dir}/NavigazeGazeTester_Windows")
+        shutil.copy2(exe_path, f"{dist_dir}/NavigazeGazeTester_Windows.exe")
         print(f"[OK] Copied executable to {dist_dir}/")
     else:
         print("[ERROR] Executable not found in dist/")
