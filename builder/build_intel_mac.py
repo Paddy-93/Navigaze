@@ -12,21 +12,21 @@ def install_pyinstaller():
     """Install PyInstaller if not already installed"""
     try:
         import PyInstaller
-        print("✅ PyInstaller already installed")
+        print("[OK] PyInstaller already installed")
         return True
     except ImportError:
-        print("📦 Installing PyInstaller...")
+        print("[INFO] Installing PyInstaller...")
         try:
             subprocess.check_call([sys.executable, "-m", "pip", "install", "pyinstaller"])
-            print("✅ PyInstaller installed successfully")
+            print("[OK] PyInstaller installed successfully")
             return True
         except subprocess.CalledProcessError as e:
-            print(f"❌ Failed to install PyInstaller: {e}")
+            print(f"[ERROR] Failed to install PyInstaller: {e}")
             return False
 
 def build_intel_executable():
     """Build executable for Intel Mac architecture"""
-    print("🔨 Building Intel Mac executable...")
+    print("[INFO] Building Intel Mac executable...")
     
     # PyInstaller command for Intel Mac
     cmd = [
@@ -57,15 +57,15 @@ def build_intel_executable():
     
     try:
         subprocess.check_call(cmd)
-        print("✅ Intel Mac executable built successfully!")
+        print("[OK] Intel Mac executable built successfully!")
         return True
     except subprocess.CalledProcessError as e:
-        print(f"❌ Build failed: {e}")
+        print(f"[ERROR] Build failed: {e}")
         return False
 
 def create_intel_distribution():
     """Create distribution package for Intel Mac"""
-    print("📦 Creating Intel Mac distribution...")
+    print("[INFO] Creating Intel Mac distribution...")
     
     dist_dir = "NavigazeGazeTester_Intel_Distribution"
     
@@ -80,9 +80,9 @@ def create_intel_distribution():
     if os.path.exists("dist/NavigazeGazeTester_Intel"):
         import shutil
         shutil.copy2("dist/NavigazeGazeTester_Intel", f"{dist_dir}/NavigazeGazeTester_Intel")
-        print(f"✅ Copied executable to {dist_dir}/")
+        print(f"[OK] Copied executable to {dist_dir}/")
     else:
-        print("❌ Executable not found in dist/")
+        print("[ERROR] Executable not found in dist/")
         return False
     
     # Copy additional files
@@ -96,7 +96,7 @@ def create_intel_distribution():
             import shutil
             filename = os.path.basename(file)
             shutil.copy2(file, f"{dist_dir}/{filename}")
-            print(f"✅ Copied {filename}")
+            print(f"[OK] Copied {filename}")
     
     # Create README for Intel Mac
     readme_content = """# Navigaze Gaze Tester - Intel Mac Version
@@ -141,24 +141,24 @@ echo "Starting Navigaze Gaze Tester (Intel Mac)..."
     # Make run script executable
     os.chmod(f"{dist_dir}/Run_Intel.sh", 0o755)
     
-    print(f"✅ Intel Mac distribution created: {dist_dir}/")
+    print(f"[OK] Intel Mac distribution created: {dist_dir}/")
     return True
 
 def main():
-    print("🚀 Navigaze Gaze Tester - Intel Mac Builder")
+    print("Navigaze Gaze Tester - Intel Mac Builder")
     print("=" * 50)
     
     # Check current architecture
     current_arch = platform.machine()
-    print(f"🔍 Current architecture: {current_arch}")
+    print(f"[INFO] Current architecture: {current_arch}")
     
     if current_arch == "arm64":
-        print("⚠️  You're on Apple Silicon - this will build for Intel Mac")
+        print("[WARN] You're on Apple Silicon - this will build for Intel Mac")
         print("   The executable will work on Intel Macs but may be slower on your Mac")
     elif current_arch == "x86_64":
-        print("✅ You're on Intel Mac - this will build natively")
+        print("[OK] You're on Intel Mac - this will build natively")
     else:
-        print(f"⚠️  Unknown architecture: {current_arch}")
+        print(f"[WARN] Unknown architecture: {current_arch}")
     
     print()
     
@@ -174,9 +174,9 @@ def main():
     if not create_intel_distribution():
         return False
     
-    print("\n🎉 Intel Mac build completed successfully!")
-    print("\n📁 Your Intel Mac executable is in: NavigazeGazeTester_Intel_Distribution/")
-    print("\n📋 To distribute:")
+    print("\n[SUCCESS] Intel Mac build completed successfully!")
+    print("\n[INFO] Your Intel Mac executable is in: NavigazeGazeTester_Intel_Distribution/")
+    print("\n[INFO] To distribute:")
     print("1. Zip the NavigazeGazeTester_Intel_Distribution folder")
     print("2. Send the zip file to Intel Mac users")
     print("3. Users extract and run NavigazeGazeTester_Intel")

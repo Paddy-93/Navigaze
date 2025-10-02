@@ -165,21 +165,21 @@ class ComprehensiveGazeTester:
                 self.tts_engine = pyttsx3.init()
                 self.tts_engine.setProperty('rate', 150)
                 self.tts_engine.setProperty('volume', 1.0)
-                print("✅ TTS engine initialized")
+                print("[OK] TTS engine initialized")
                 
                 # Warm up TTS engine to prevent first-call issues
                 try:
-                    print("🔊 Warming up TTS engine...")
+                    print("[INFO] Warming up TTS engine...")
                     self.tts_engine.say("TTS ready")
                     self.tts_engine.runAndWait()
-                    print("✅ TTS engine warmed up successfully")
+                    print("[OK] TTS engine warmed up successfully")
                 except Exception as e:
-                    print(f"⚠️ TTS warm-up failed: {e}")
+                    print(f"[WARN] TTS warm-up failed: {e}")
                 
                 # Test TTS after a short delay
                 self.root.after(1000, self.test_tts)
             except Exception as e:
-                print(f"❌ Failed to initialize TTS: {e}")
+                print(f"[ERROR] Failed to initialize TTS: {e}")
                 self.tts_engine = None
         
         # Setup UI
@@ -187,7 +187,7 @@ class ComprehensiveGazeTester:
         
         # Initialize gaze detector with more aggressive settings for testing
         if not self.gaze_detector.initialize():
-            print("❌ Failed to initialize gaze detector")
+            print("[ERROR] Failed to initialize gaze detector")
             return
         
         # Make gaze detection more aggressive for testing
@@ -203,7 +203,7 @@ class ComprehensiveGazeTester:
             if hasattr(self.gaze_detector.gaze_detector, 'repeat_rate_ms'):
                 self.gaze_detector.gaze_detector.repeat_rate_ms = 200     # Faster continuous firing (was 250)
             
-            print("🎯 Test mode: More aggressive gaze detection enabled")
+            print("[INFO] Test mode: More aggressive gaze detection enabled")
         
         # Set up signal handlers for graceful shutdown
         self.setup_signal_handlers()
@@ -388,8 +388,8 @@ class ComprehensiveGazeTester:
         # Debug: Print only detected gazes
         if direction and gaze_detected:
             timestamp = time.time()
-            print(f"🔍 GAZE DETECTED: {direction} (continuous: {is_continuous})")
-            self.log_result(f"👁️ GAZE DETECTED: {direction} (continuous: {is_continuous}) at {timestamp:.3f}")
+            print(f"[DETECT] GAZE DETECTED: {direction} (continuous: {is_continuous})")
+            self.log_result(f"[GAZE] GAZE DETECTED: {direction} (continuous: {is_continuous}) at {timestamp:.3f}")
         
         # For sequence steps, only add initial gaze detections (not continuous follow-ups)
         if is_sequence_step and direction and gaze_detected:
@@ -402,7 +402,7 @@ class ComprehensiveGazeTester:
                 self.step_data['pattern_timings'] = []
             
             # Log the gaze
-            self.log_result(f"👁️ GAZE DETECTED: {direction}")
+            self.log_result(f"[GAZE] GAZE DETECTED: {direction}")
             
             # Update sequence progress (this will add to sequence)
             self.update_sequence_progress(direction)
@@ -410,7 +410,7 @@ class ComprehensiveGazeTester:
         
         # Log every gaze detection to test log for other steps
         if direction and gaze_detected:
-            self.log_result(f"👁️ GAZE DETECTED: {direction}")
+            self.log_result(f"[GAZE] GAZE DETECTED: {direction}")
         
         # Handle neutral gaze (no direction) - reset hold tracking
         if not direction and hasattr(self, 'step_data') and self.step_data:
@@ -442,7 +442,7 @@ class ComprehensiveGazeTester:
                     'is_continuous': is_continuous,
                     'datetime': datetime.fromtimestamp(current_time).strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
                 }
-                print(f"🔍 CREATED DETECTION: {detection}")
+                print(f"[DETECT] CREATED DETECTION: {detection}")
             else:
                 detection = None
             
@@ -467,7 +467,7 @@ class ComprehensiveGazeTester:
                     # New gaze detected - record start time
                     self.step_data['current_gaze_state'] = target_direction
                     self.step_data['hold_start_time'] = time.time()
-                    self.log_result(f"🎯 Started {target_direction} gaze - hold for {required_duration}s")
+                    self.log_result(f"[HOLD] Started {target_direction} gaze - hold for {required_duration}s")
                 elif self.step_data['current_gaze_state'] == target_direction:
                     # Continuing the same gaze - check duration
                     if self.step_data['hold_start_time']:
@@ -475,7 +475,7 @@ class ComprehensiveGazeTester:
                         
                         # Only log every 0.5 seconds to avoid spam
                         if 'last_log_time' not in self.step_data or time.time() - self.step_data['last_log_time'] > 0.5:
-                            self.log_result(f"⏱️ HOLDING {target_direction}: {hold_duration:.1f}s / {required_duration}s")
+                            self.log_result(f"[HOLD] HOLDING {target_direction}: {hold_duration:.1f}s / {required_duration}s")
                             self.step_data['last_log_time'] = time.time()
                         
                         # Check if hold duration is met
@@ -505,7 +505,7 @@ class ComprehensiveGazeTester:
                             # Set a flag to wait for neutral before next hold
                             self.step_data['waiting_for_neutral'] = True
                             
-                            self.log_result(f"✅ LONG {target_direction} hold completed ({hold_duration:.1f}s)")
+                            self.log_result(f"[SUCCESS] LONG {target_direction} hold completed ({hold_duration:.1f}s)")
                             
                             # Update UI and beep
                             def _on_hold_complete():
@@ -532,12 +532,12 @@ class ComprehensiveGazeTester:
                 'is_continuous': is_continuous,
                 'datetime': datetime.fromtimestamp(current_time).strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
             }
-            print(f"🔍 CREATED DETECTION: {detection}")
+            print(f"[DETECT] CREATED DETECTION: {detection}")
             
             # Add the detection
             self.step_data['detections'].append(detection)
-            print(f"🔍 ADDED DETECTION: {detection}")
-            self.log_result(f"👁️ {direction} gaze registered at {detection['datetime']}")
+            print(f"[DETECT] ADDED DETECTION: {detection}")
+            self.log_result(f"[GAZE] {direction} gaze registered at {detection['datetime']}")
             
             # Check if this is a sequence step
             is_sequence_step = step['type'].startswith('sequence_')
@@ -552,7 +552,7 @@ class ComprehensiveGazeTester:
             
             # Check if step is complete and auto-advance
             if self.check_step_completion():
-                self.log_result("🎯 Step target reached! Auto-advancing...")
+                self.log_result("[ADVANCE] Step target reached! Auto-advancing...")
                 # Cancel the timer and complete step immediately
                 self.complete_current_step()
     
@@ -604,22 +604,22 @@ class ComprehensiveGazeTester:
         
         # Log the sequence update
         sequence_display = " → ".join(current_seq)
-        self.log_result(f"👁️ GAZE SEQUENCE: {sequence_display}")
+        self.log_result(f"[SEQUENCE] GAZE SEQUENCE: {sequence_display}")
         
         # Debug: Print current sequence and pattern
-        print(f"🔍 DEBUG: Current sequence: {current_seq}")
-        print(f"🔍 DEBUG: Pattern: {pattern}")
-        print(f"🔍 DEBUG: Sequence length: {len(current_seq)}, Pattern length: {len(pattern)}")
+        print(f"[DEBUG] Current sequence: {current_seq}")
+        print(f"[DEBUG] Pattern: {pattern}")
+        print(f"[DEBUG] Sequence length: {len(current_seq)}, Pattern length: {len(pattern)}")
         
         # Check if current sequence matches the pattern
         if len(current_seq) >= len(pattern):
-            print(f"🔍 DEBUG: Checking pattern match - current_seq: {current_seq}, pattern: {pattern}")
+            print(f"[DEBUG] Checking pattern match - current_seq: {current_seq}, pattern: {pattern}")
             # Check if the last part matches the pattern
             if current_seq[-len(pattern):] == pattern:
-                print(f"🔍 DEBUG: Pattern match found!")
+                print(f"[DEBUG] Pattern match found!")
                 # Pattern completed!
                 self.step_data['completed_patterns'] += 1
-                print(f"🔍 DEBUG: completed_patterns = {self.step_data['completed_patterns']}")
+                print(f"[DEBUG] completed_patterns = {self.step_data['completed_patterns']}")
                 
                 # Calculate pattern timing
                 current_time = time.time()
@@ -643,7 +643,7 @@ class ComprehensiveGazeTester:
                 }
                 self.step_data['pattern_timings'].append(pattern_timing)
                 
-                self.log_result(f"🎯 Pattern {self.step_data['completed_patterns']}/{repetitions} completed! (Duration: {pattern_duration:.2f}s)")
+                self.log_result(f"[PATTERN] Pattern {self.step_data['completed_patterns']}/{repetitions} completed! (Duration: {pattern_duration:.2f}s)")
                 
                 # Reset for next pattern
                 self.step_data['gaze_sequence'] = []
@@ -656,19 +656,19 @@ class ComprehensiveGazeTester:
                 self.root.after(1000, lambda: self._update_sequence_ui(step, pattern, repetitions, []))
                 
                 # Check if all patterns are done
-                print(f"🔍 DEBUG: Checking if {self.step_data['completed_patterns']} >= {repetitions}")
+                print(f"[DEBUG] Checking if {self.step_data['completed_patterns']} >= {repetitions}")
                 if self.step_data['completed_patterns'] >= repetitions:
-                    print(f"🔍 DEBUG: All patterns completed! Letting normal flow handle completion")
+                    print(f"[DEBUG] All patterns completed! Letting normal flow handle completion")
                     # Log total sequence time
                     if 'sequence_start_time' in self.step_data:
                         total_sequence_time = time.time() - self.step_data['sequence_start_time']
-                        self.log_result(f"🎉 All patterns completed! Total sequence time: {total_sequence_time:.2f}s")
+                        self.log_result(f"[SUCCESS] All patterns completed! Total sequence time: {total_sequence_time:.2f}s")
                     else:
-                        self.log_result("🎉 All patterns completed!")
+                        self.log_result("[SUCCESS] All patterns completed!")
                     # Don't call complete_current_step here - let the normal flow in process_step_gaze handle it
                     return  # Stop processing more patterns after completion
             else:
-                print(f"🔍 DEBUG: Pattern mismatch - expected: {pattern}, got: {current_seq[-len(pattern):]}")
+                print(f"[DEBUG] Pattern mismatch - expected: {pattern}, got: {current_seq[-len(pattern):]}")
         else:
                 # Check if sequence is broken (too long and doesn't match)
                 if len(current_seq) > len(pattern):
