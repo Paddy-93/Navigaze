@@ -93,7 +93,6 @@ def create_windows_distribution():
     
     # Copy additional files
     files_to_copy = [
-        "gaze_reporting/google_drive_uploader.py",
         "gaze_reporting/README.md"
     ]
     
