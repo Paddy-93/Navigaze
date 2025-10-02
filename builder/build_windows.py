@@ -67,7 +67,7 @@ def create_windows_distribution():
     """Create distribution package for Windows"""
     print("[INFO] Creating Windows distribution...")
     
-    dist_dir = "NavigazeGazeTester_Windows_Distribution"
+    dist_dir = "builder/NavigazeGazeTester_Windows_Distribution"
     
     # Remove existing distribution
     if os.path.exists(dist_dir):
@@ -178,9 +178,9 @@ def main():
         return False
     
     print("\n[SUCCESS] Windows build completed successfully!")
-    print("\n[INFO] Your Windows executable is in: NavigazeGazeTester_Windows_Distribution/")
+    print("\n[INFO] Your Windows executable is in: builder/NavigazeGazeTester_Windows_Distribution/")
     print("\n[INFO] To distribute:")
-    print("1. Zip the NavigazeGazeTester_Windows_Distribution folder")
+    print("1. Zip the builder/NavigazeGazeTester_Windows_Distribution folder")
     print("2. Send the zip file to Windows users")
     print("3. Users extract and run NavigazeGazeTester_Windows.exe")
     
