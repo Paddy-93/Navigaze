@@ -39,8 +39,17 @@ SCOPES = ['https://www.googleapis.com/auth/drive.file']
 
 # Configuration
 DRIVE_FOLDER_NAME = "Navigaze Test Results"
-CREDENTIALS_FILE = os.path.join(os.path.dirname(__file__), "credentials.json")
-TOKEN_FILE = os.path.join(os.path.dirname(__file__), "token.json")
+
+# For PyInstaller builds, look for credentials in the same directory as the executable
+if getattr(sys, 'frozen', False):
+    # Running as PyInstaller executable
+    base_path = os.path.dirname(sys.executable)
+else:
+    # Running as Python script
+    base_path = os.path.dirname(__file__)
+
+CREDENTIALS_FILE = os.path.join(base_path, "credentials.json")
+TOKEN_FILE = os.path.join(base_path, "token.json")
 
 
 class GoogleDriveUploader:
@@ -75,6 +84,7 @@ class GoogleDriveUploader:
                 if not os.path.exists(CREDENTIALS_FILE):
                     print(f"[ERROR] {CREDENTIALS_FILE} not found!")
                     print("Please download your credentials.json from Google Cloud Console")
+                    print(f"Place it in the same folder as the executable: {base_path}")
                     return False
                 
                 try:
